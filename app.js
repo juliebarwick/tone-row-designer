@@ -1,4 +1,5 @@
 var $toneSquare = $('#tr-square');
+
 $(document).ready(function() {
 
   $('#draw').on('click', function() {
@@ -11,12 +12,13 @@ $(document).ready(function() {
 });
 
 var drawSquares = function(n) {
-  $toneSquare.html('');
 
   if (n > 12 || n < 1) {
     alert('Please provide a row number between 1 and 12.');
     return;
   }
+
+  $toneSquare.html('');
 
   if (!n) {
     n = 12;
@@ -33,7 +35,17 @@ var drawSquares = function(n) {
 }
 
 
+var shuffle = function(arr) {
+  var res = arr.slice();
+  for (var i = res.length - 1; i > 0; i--) {
+    var randomNum = Math.floor(Math.random() * i);
+    var temp = res[i];
+    res[i] = res[randomNum];
+    res[randomNum] = temp
+  }
 
+  return res;
+}
 
 
 
@@ -61,6 +73,9 @@ for (var i = 0; i < originalRow.length; i++) {
   transposingRowValues.push(invertedTransposing);
 }
 
+var octaveReduce = function(n) {
+
+}
 function octaveReduce(n) {
   return ((n % 12) + 12) % 12;
 }
