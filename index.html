@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    <script src="lib/jquery-3.6.0.min.js"></script>
+
+    <link href="styles.css" rel="stylesheet">
+
+
+    <title>Tone Row Designer</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Tone Row Designer</h1>
+
+    </header>
+    <main>
+        <input type="number" min="1" max="12" placeholder="Row length between 1-12" autofocus autocomplete="off" name="pitch-number">
+        <button id="draw">Draw</button>
+      <div>
+        <div id="tr-square">
+
+        </div>
+      <div id="pitch-input">
+      </div>
+    </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
