@@ -12,14 +12,20 @@ $(document).ready(function() {
 
 var drawSquares = function(n) {
   $toneSquare.html('');
+
   if (n > 12 || n < 1) {
     alert('Please provide a row number between 1 and 12.');
+    return;
   }
+
   if (!n) {
     n = 12;
   }
+
+  $toneSquare.css("grid-template-rows", "repeat(" + n + ", 1fr)")
   for (var i = 0; i < n; i++) {
-    var $row = $('<div>').addClass('tr')
+    var $row = $('<div>').addClass('tr');
+    $row.css("grid-template-columns", "repeat(" + n + ", 1fr)")
     for (var j = 0; j < n; j++) {
       var $pitch = $('<div>').addClass('pitch-box');
       $row.prepend($pitch)
