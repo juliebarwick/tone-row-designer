@@ -12,6 +12,9 @@ $(document).ready(function() {
 
 var drawSquares = function(n) {
   $toneSquare.html('');
+  if (n > 12 || n < 1) {
+    alert('Please provide a row number between 1 and 12.');
+  }
   if (!n) {
     n = 12;
   }
