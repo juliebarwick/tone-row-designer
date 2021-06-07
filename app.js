@@ -22,10 +22,8 @@ var drawSquares = function(n) {
     n = 12;
   }
 
-  $toneSquare.css("grid-template-rows", "repeat(" + n + ", 1fr)")
   for (var i = 0; i < n; i++) {
     var $row = $('<div>').addClass('tr');
-    $row.css("grid-template-columns", "repeat(" + n + ", 1fr)")
     for (var j = 0; j < n; j++) {
       var $pitch = $('<div>').addClass('pitch-box');
       $row.prepend($pitch)
