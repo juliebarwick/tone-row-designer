@@ -51,7 +51,13 @@ table {
 }
 
 /* Tone Square */
+#tr-area {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+}
+
 #tr-square {
+  grid-column-start: 2;
   display: grid;
   box-sizing: border-box;
   grid-template-rows: repeat(12, 2em);
