@@ -19,6 +19,7 @@ $(document).ready(function() {
     drawSquares(n);
     var originalRow = createShuffledNumList(n);
     var squareArr = calcSquareValues(originalRow);
+    fillSquares(squareArr)
   })
 
 });
@@ -39,6 +40,16 @@ var drawSquares = function(n) {
     }
     $row.appendTo($toneSquare);
   }
+}
+
+var fillSquares = function(arr) {
+
+  $('.tr').each(function(i, row) {
+
+    $('.pitch-box', this).each(function(j, box) {
+      $(this).text(arr[i][j]);
+    });
+  });
 }
 
 var generateListOfPitches = function(n) {
