@@ -2,24 +2,27 @@ var $toneSquare = $('#tr-square');
 
 $(document).ready(function() {
 
-  drawSquares(12);
+  // Default view
+  drawSquares();
 
   $('#draw').on('click', function() {
-    var n = $('input').val();
+    var n = Number($('input').val());
+
+    // Check/force input to be a whole number
+    var res = checkInput(n);
+    if (!res) {
+      return;
+    } else {
+      n = res;
+    }
+
     drawSquares(n);
     createShuffledNumList(n);
   })
 
-
-
 });
 
 var drawSquares = function(n) {
-
-  if (n > 12 || n < 1) {
-    alert('Please provide a row number between 1 and 12.');
-    return;
-  }
 
   $toneSquare.html('');
 
@@ -37,69 +40,63 @@ var drawSquares = function(n) {
   }
 }
 
-
-var createShuffledNumList = function(n) {
+var generateListOfPitches = function(n) {
+  if (n === undefined || n < 1) {
+    n = 12;
+  }
   var res = [];
-
   for (var i = 0; i < n; i++) {
     res.push(i);
   }
-
-  for (var j = res.length - 1; j > 0; j--) {
-    // Get a random index number, from current current index to
-    var randomNum = Math.floor(Math.random() * j);
-    // Swap current element with randomly selected element
-    var temp = res[j];
-    res[j] = res[randomNum];
-    res[randomNum] = temp
-  }
-  console.log(res)
   return res;
 }
 
-
-
-var originalRow = [];
-
-const N = 12;
-while (originalRow.length < N) {
-  var randInt1to12 = Math.floor(Math.random() * (N))
-  var match = false;
-  for (var i = 0; i <= originalRow.length; i++) {
-    if (originalRow[i] === randInt1to12) {
-      match = true;
-    }
+var shuffleAllPitches = function() {
+  var pitches = generateListOfPitches(12);
+  for (var j = pitches.length - 1; j > 0; j--) {
+    // Get a random index number, from current current index to
+    var randomNum = Math.floor(Math.random() * j);
+    // Swap current element with randomly selected element
+    var temp = pitches[j];
+    pitches[j] = pitches[randomNum];
+    pitches[randomNum] = temp
   }
-  if (!match) {
-    originalRow.push(randInt1to12);
-  }
+  return pitches;
 }
 
-var toneSquare = [];
+var checkInput = function(x) {
+  if (isNaN(x)) {
+    alert('Please provide a valid number');
+    return false;
+  }
 
-var transposingRowValues = []
-for (var i = 0; i < originalRow.length; i++) {
-  var invertedTransposing = (originalRow[0] - originalRow[i]);
-  transposingRowValues.push(invertedTransposing);
+  x = Math.round(x);
+
+  if (x > 12 || x < 1) {
+    alert('Please provide a row number between 1 and 12.');
+    return false;
+  }
+
+  return x;
+}
+
+var createShuffledNumList = function(n) {
+  var pitches = shuffleAllPitches();
+  var maxLength = pitches.length - n;
+  var randStart = Math.floor(Math.random() * maxLength);
+  console.log(pitches.slice(randStart, randStart + n))
 }
 
 var octaveReduce = function(n) {
-
-}
-function octaveReduce(n) {
   return ((n % 12) + 12) % 12;
 }
 
-for (var i = 0; i < N; i++) {
-  var row = [];
-  for (var j = 0; j < N; j++) {
-    var note = octaveReduce(transposingRowValues[i] + originalRow[j])
-    row.push(note);
-  }
-  toneSquare.push(row);
+var calcInvertedValues = function(arr) {
+  var first = arr[0];
+  return arr.map(function(el) {
+    return first - el;
+  });
 }
-
-// console.log(toneSquare);
 
 function prettyPrintRow(square) {
   for (var i = 0; i < square.length; i++) {
