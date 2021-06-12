@@ -17,7 +17,8 @@ $(document).ready(function() {
     }
 
     drawSquares(n);
-    createShuffledNumList(n);
+    var originalRow = createShuffledNumList(n);
+    var squareArr = calcSquareValues(originalRow);
   })
 
 });
@@ -84,7 +85,7 @@ var createShuffledNumList = function(n) {
   var pitches = shuffleAllPitches();
   var maxLength = pitches.length - n;
   var randStart = Math.floor(Math.random() * maxLength);
-  console.log(pitches.slice(randStart, randStart + n))
+  return pitches.slice(randStart, randStart + n);
 }
 
 var octaveReduce = function(n) {
@@ -96,6 +97,18 @@ var calcInvertedValues = function(arr) {
   return arr.map(function(el) {
     return first - el;
   });
+}
+
+var calcSquareValues = function(oRow) {
+  var invertedValues = calcInvertedValues(oRow);
+
+  var square = invertedValues.map(function(transposingValue){
+    return oRow.map(function(currentPitch) {
+      return octaveReduce(currentPitch + transposingValue);
+    });
+  });
+
+  return square;
 }
 
 function prettyPrintRow(square) {
