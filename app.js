@@ -61,10 +61,9 @@ $(document).ready(function() {
     var $rowSpans = $('.original-row-item');
     if ($rowSpans) {
       $rowSpans.each(function(index, element) {
-        var input = toneSquare[0][index];
-        console.log(input);
+        var input = toneSquare[0][index] || toneSquare[index];
         if (mode !== 'numeric') {
-          input = convertToLetter(toneSquare[0][index], mode);
+          input = convertToLetter(input, mode);
         }
         $(this).html(input);
       })
@@ -181,7 +180,8 @@ var fillSquares = function(arr) {
 
   $('.tr').each(function(i, row) {
     $('.pitch-box', this).each(function(j, box) {
-      $(this).html(arr[i][j]);
+      var input = arr[i][j];
+      $(this).html(input);
     });
   });
 }
