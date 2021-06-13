@@ -39,33 +39,39 @@
       </div>
 
       <div id="tr-area">
+
         <!-- Where the tone square lives -->
         <div id="tr-square"></div>
         <div class="random d-grid col-4 mx-auto">
           <button id="randomize" class="btn btn-dark">Random</button>
         </div>
 
-
           <!-- Build your square section -->
           <div id="row-builder">
+
           <h3>Build Your Own</h3>
+          <label for="row-length">Row length, between 1 and 12: </label>
+          <input type="number" min="1" max="12" name="row-length" id="row-length">
+          <button id="draw" class="btn btn-dark">Draw Square</button>
 
-            <label for="row-length">Row length, between 1 and 12: </label>
-            <input type="number" min="1" max="12" name="row-length" id="row-length">
-            <button id="draw" class="btn btn-dark">Draw Square</button>
-            <hr>
-            <div id="pitch-select">
-              <h4>Choose pitches </h4>
-              <div id="pitches" class="d-flex justify-content-between"><span id="random-pitch">Random</span></div>
+          <hr>
 
+          <div id="pitch-select">
 
+            <h4>Choose pitches</h4>
+            <div id="pitches" class="d-flex justify-content-between">
+              <span id="random-pitch">Random</span>
             </div>
-            <hr>
           </div>
+
+          <hr>
+
           <h4>Your row:</h4>
           <p id="user-row"></p>
           <hr>
           <button id="clear" class="btn btn-dark">Clear</button>
+
+        </div>
 
       </div>
 
