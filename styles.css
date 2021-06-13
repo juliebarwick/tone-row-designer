@@ -1,91 +1,66 @@
-/* CSS Reset
- http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+/* Header */
+header {
+  padding: 15px;
+  text-align: center;
 }
 
-/* HTML5 display-role reset for older browsers */
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
- blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+/* Display Mode */
+.display-mode *{
+  margin-right: 5px;
+  text-align: center;
 }
 
 /* Tone Square */
 #tr-area {
-  margin: auto;
-  background-color: grey;
+  padding: 10px;
+  margin: 10px auto;
+  background-color: #F2F2F2;
   border: 1px solid black;
-  border-radius: 4px;
-  width: 70%;
+  border-radius: 10px;
+  width: 80%;
 }
 
 #tr-square {
   display: table;
   border-collapse: collapse;
   box-sizing: border-box;
-  margin: auto;
+  margin: 20px auto;
+  padding: 10px 0;
+}
+
+.random {
+  padding: 10px;
+}
+
+#random-pitch {
+  border: 0.5px solid grey;
+  background-color: #fff;
+  height: 2rem;
+  padding: 2px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .tr {
   display: table-row;
 }
 
-body {
-  font-family: Arial, sans-serif;
-}
-
-button {
-  cursor: pointer;
-}
-
-#pitch-select {
-  display: flex;
-}
-
 .pitch-input {
-  border: 1px solid grey;
-  padding: 5px;
+  border: 0.5px solid grey;
+  background-color: #fff;
+  width: 2rem;
+  height: 2rem;
+  padding: 2px;
   cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .clicked {
@@ -93,21 +68,23 @@ button {
 }
 
 .original-row-item {
-  color: red;
+  font-weight: bold;
+  color: #dc3545;
   padding-right: 10px;
 }
 
+#row-builder {
+  padding-top: 15px;
+  border-top: 3px solid black;
+}
+
 .pitch-box {
-  width: 2em;
-  height: 2em;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid gray;
-  background-color: lightgrey;
+  background-color: #fff;
   color: black;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-}
-
-.highlighted {
-  border-color: red;
 }

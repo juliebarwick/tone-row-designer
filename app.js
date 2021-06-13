@@ -9,7 +9,7 @@ $(document).ready(function() {
   // Default view
   drawSquares(rowLength);
   drawPitchButtons();
-  $('#numeric').addClass('highlighted');
+  $('#numeric').removeClass('btn-dark').addClass('btn-danger');
 
   $('#draw').on('click', function() {
     clearAll();
@@ -25,7 +25,7 @@ $(document).ready(function() {
     drawSquares(rowLength);
   });
 
-  $('#random').on('click', function() {
+  $('#random-pitch').on('click', function() {
     createAndFillSquare(rowLength, mode);
     $('#user-row').html('')
     var row = toneSquare[0];
@@ -35,9 +35,10 @@ $(document).ready(function() {
   })
 
   $('.mode').on('click', function() {
-    $('button.mode').removeClass('highlighted');
-    $(this).addClass('highlighted');
     mode = $(this).attr('id');
+
+    $('button.mode').removeClass('btn-danger').addClass('btn-dark');
+    $(this).removeClass('btn-dark').addClass('btn-danger');
 
     var $allPitchInputs = $('.pitch-input');
 
@@ -60,9 +61,10 @@ $(document).ready(function() {
     var $rowSpans = $('.original-row-item');
     if ($rowSpans) {
       $rowSpans.each(function(index, element) {
-        var input = index;
+        var input = toneSquare[0][index];
+        console.log(input);
         if (mode !== 'numeric') {
-          input = convertToLetter(input, mode);
+          input = convertToLetter(toneSquare[0][index], mode);
         }
         $(this).html(input);
       })
@@ -102,19 +104,7 @@ $(document).ready(function() {
   $('#clear').on('click', clearAll)
 });
 
-var createAndFillSquare = function(n, mode) {
-  drawSquares(n);
-  var originalRow = createShuffledNumList(n);
-  toneSquare = calcSquareValues(originalRow);
-
-  if (mode !== 'numeric') {
-    var letters = convertSquareToLetters(toneSquare, mode);
-    fillSquares(letters);
-  } else {
-    fillSquares(toneSquare);
-  }
-}
-
+// Functions to build and fill the tone square
 var drawSquares = function(n) {
 
   $toneSquare.html('');
@@ -131,47 +121,6 @@ var drawSquares = function(n) {
     }
     $row.appendTo($toneSquare);
   }
-}
-
-var fillSquares = function(arr) {
-
-  $('.tr').each(function(i, row) {
-    $('.pitch-box', this).each(function(j, box) {
-      $(this).html(arr[i][j]);
-    });
-  });
-}
-
-var convertSquareToLetters = function(arr, pref) {
-
-  // Make a copy of the nested array
-  var squareInLetters = arr.map(function(a) {
-    return a.slice();
-  });
-
-  for (var i = 0; i < squareInLetters.length; i++) {
-    for (var j = 0; j < squareInLetters[i].length; j++) {
-      squareInLetters[i][j] = convertToLetter(squareInLetters[i][j], pref);
-    }
-  }
-  return squareInLetters;
-}
-
-var convertToLetter = function(num, pref) {
-
-  var letters = {
-    0: 'C',
-    2: 'D',
-    4: 'E',
-    5: 'F',
-    7: 'G',
-    9: 'A',
-    11: 'B'
-  };
-  if (pref === 'sharp') {
-    return letters[num] ? letters[num] : letters[num - 1] + '&#9839;'
-  }
-  return letters[num] ? letters[num] : letters[num + 1] + '&#9837'
 }
 
 var generateListOfPitches = function(n) {
@@ -196,22 +145,6 @@ var shuffleAllPitches = function() {
     pitches[randomNum] = temp
   }
   return pitches;
-}
-
-var checkInput = function(x) {
-  if (isNaN(x)) {
-    alert('Please provide a valid number');
-    return false;
-  }
-
-  x = Math.round(x);
-
-  if (x > 12 || x < 1) {
-    alert('Please provide a row number between 1 and 12.');
-    return false;
-  }
-
-  return x;
 }
 
 var createShuffledNumList = function(n) {
@@ -244,8 +177,80 @@ var calcSquareValues = function(oRow) {
   return square;
 }
 
+var fillSquares = function(arr) {
+
+  $('.tr').each(function(i, row) {
+    $('.pitch-box', this).each(function(j, box) {
+      $(this).html(arr[i][j]);
+    });
+  });
+}
+
+var createAndFillSquare = function(n, mode) {
+  drawSquares(n);
+  var originalRow = createShuffledNumList(n);
+  toneSquare = calcSquareValues(originalRow);
+
+  if (mode !== 'numeric') {
+    var letters = convertSquareToLetters(toneSquare, mode);
+    fillSquares(letters);
+  } else {
+    fillSquares(toneSquare);
+  }
+}
+
+// Functions to handle letter/number switching
+var convertSquareToLetters = function(arr, pref) {
+
+  // Make a copy of the nested array
+  var squareInLetters = arr.map(function(a) {
+    return a.slice();
+  });
+
+  for (var i = 0; i < squareInLetters.length; i++) {
+    for (var j = 0; j < squareInLetters[i].length; j++) {
+      squareInLetters[i][j] = convertToLetter(squareInLetters[i][j], pref);
+    }
+  }
+  return squareInLetters;
+}
+
+var convertToLetter = function(num, pref) {
+
+  var letters = {
+    0: 'C',
+    2: 'D',
+    4: 'E',
+    5: 'F',
+    7: 'G',
+    9: 'A',
+    11: 'B'
+  };
+  if (pref === 'sharp') {
+    return letters[num] ? letters[num] : letters[num - 1] + '&#9839;'
+  }
+  return letters[num] ? letters[num] : letters[num + 1] + '&#9837'
+}
+
+// Layout helper functions
+var checkInput = function(x) {
+  if (isNaN(x)) {
+    alert('Please provide a valid number');
+    return false;
+  }
+
+  x = Math.round(x);
+
+  if (x > 12 || x < 1) {
+    alert('Please provide a row number between 1 and 12.');
+    return false;
+  }
+
+  return x;
+}
+
 var drawPitchButtons = function(pref) {
-  $pitchInputArea = $('#pitch-select');
+  $pitchInputArea = $('#pitches');
   for (var i = 0; i < 12; i++) {
     $pitchButton = $('<div>').addClass('pitch-input').attr('id', i)
     $pitchButton.text(i)
@@ -272,7 +277,7 @@ var makeAllUnclicked = function() {
 
 var addRowText = function(str) {
   if (mode !== 'numeric') {
-    str = convertToLetter(str);
+    str = convertToLetter(str, mode);
   }
   var $rowItem = $('<span>').addClass('original-row-item').html(str)
   $('#user-row').append($rowItem);
