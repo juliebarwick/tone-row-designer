@@ -70,6 +70,33 @@ table {
   display: table-row;
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+#pitch-select {
+  display: flex;
+}
+
+.pitch-input {
+  border: 1px solid grey;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.clicked {
+  color: lightgray;
+}
+
+.original-row-item {
+  color: red;
+  padding-right: 10px;
+}
+
 .pitch-box {
   width: 2em;
   height: 2em;
@@ -77,4 +104,10 @@ table {
   background-color: lightgrey;
   color: black;
   display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.highlighted {
+  border-color: red;
 }
