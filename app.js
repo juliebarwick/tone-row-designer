@@ -94,8 +94,12 @@ $(document).ready(function() {
     $(this).addClass('clicked');
 
     if (rowLength === clicked) {
-      toneSquare = calcSquareValues(toneSquare)
-      fillSquares(toneSquare);
+      toneSquare = calcSquareValues(toneSquare);
+      var inputSquare = toneSquare;
+      if (mode !== numeric) {
+        inputSquare = convertSquareToLetters(toneSquare, mode);
+      }
+      fillSquares(inputSquare);
       makeAllClicked();
     }
   });
