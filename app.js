@@ -61,7 +61,8 @@ $(document).ready(function() {
     var $rowSpans = $('.original-row-item');
     if ($rowSpans) {
       $rowSpans.each(function(index, element) {
-        var input = toneSquare[0][index] || toneSquare[index];
+        var input = (toneSquare[0][index] === undefined) ? toneSquare[index] : toneSquare[0][index];
+        console.log(input)
         if (mode !== 'numeric') {
           input = convertToLetter(input, mode);
         }
