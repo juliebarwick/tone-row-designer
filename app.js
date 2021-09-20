@@ -62,7 +62,6 @@ $(document).ready(function() {
     if ($rowSpans) {
       $rowSpans.each(function(index, element) {
         var input = (toneSquare[0][index] === undefined) ? toneSquare[index] : toneSquare[0][index];
-        console.log(input)
         if (mode !== 'numeric') {
           input = convertToLetter(input, mode);
         }
@@ -97,7 +96,7 @@ $(document).ready(function() {
     if (rowLength === clicked) {
       toneSquare = calcSquareValues(toneSquare);
       var inputSquare = toneSquare;
-      if (mode !== numeric) {
+      if (mode !== 'numeric') {
         inputSquare = convertSquareToLetters(toneSquare, mode);
       }
       fillSquares(inputSquare);
